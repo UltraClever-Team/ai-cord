@@ -27,16 +27,16 @@ async def on_message(message):
         return
     if bot.user.mentioned_in(message):
         if profanity.contains_profanity(message.content):
-            await message.channel.send("I'm sorry, but I can't respond to messages with inappropriate language.")
+            await message.reply("I'm sorry, but I can't respond to messages with inappropriate language.")
             return
         else:
             prompt = message.content.replace(f'<@{bot.user.id}>', '').strip()
             reply = ask(prompt)
             if profanity.contains_profanity(reply):
-                await message.channel.send("I'm sorry, but I can't provide a response due to inappropriate content.")
+                await message.reply("I'm sorry, but I can't provide a response due to inappropriate content.")
                 return
             else:
-                await message.channel.send(reply)
+                await message.reply(reply)
 
 @bot.slash_command(name="ping", description="Ping the bot")
 async def ping(ctx):
